@@ -5,9 +5,13 @@
 
     socket.on('connect', () => console.log('Connected to socket.io server!'));
 
-    socket.on('message', message => console.log(message.text));
+    socket.on('message', message => {
+        console.log(message.text);
 
-    let $form = jQuery('#message-form');
+        $('.messages').append(`<p>${message.text}</p>`);
+    });
+
+    let $form = $('#message-form');
     $form.on('submit', event => {
         event.preventDefault();
 
