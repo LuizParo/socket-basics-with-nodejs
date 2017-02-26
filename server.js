@@ -1,6 +1,9 @@
+'use strict'
+
 let app = require('./config/express');
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
+let moment = require('moment');
 
 const PORT = process.env.PORT || 3000;
 
@@ -9,11 +12,14 @@ io.on('connection', socket => {
 
     socket.on('message', message => {
         console.log(`Message received: ${message.text}`);
+
+        message.timestamp = moment().valueOf();
         io.emit('message', message);
     });
 
     io.emit('message', {
-        text : 'Welcome to the chat application'
+        text : 'Welcome to the chat application',
+        timestamp : moment().valueOf()
     });
 });
 

@@ -6,9 +6,11 @@
     socket.on('connect', () => console.log('Connected to socket.io server!'));
 
     socket.on('message', message => {
+        let momentTimestamp = moment.utc(message.timestamp);
+
         console.log(message.text);
 
-        $('.messages').append(`<p>${message.text}</p>`);
+        $('.messages').append(`<p><strong>${momentTimestamp.local().format('h:mm a')}</strong> - ${message.text}</p>`);
     });
 
     let $form = $('#message-form');
