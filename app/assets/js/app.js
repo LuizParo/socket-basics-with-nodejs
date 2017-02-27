@@ -6,7 +6,13 @@
 
     let socket = io();
 
-    socket.on('connect', () => console.log('Connected to socket.io server!'));
+    socket.on('connect', () => {
+        console.log('Connected to socket.io server!');
+        socket.emit('joinRoom', {
+            name : name,
+            room : room
+        });
+    });
 
     $('.room-title').text(room);
 
