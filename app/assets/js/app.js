@@ -20,9 +20,13 @@
         console.log(message.text);
 
         let timestamp = moment.utc(message.timestamp).local().format('h:mm a');
-        let $message = $('.messages');
+
+        let $message = $('<li class="list-group-item"></li>');
         $message.append(`<p><strong>${message.name} ${timestamp}</strong></p>`);
         $message.append(`<p>${message.text}</p>`);
+
+        let $messages = $('.messages');
+        $messages.append($message);
     });
 
     let $form = $('#message-form');
